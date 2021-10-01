@@ -1,0 +1,18 @@
+.App__first-btn {
+    margin-right: 15px;
+  }
+
+.delete-modal__btn {
+    padding: 10px 20px;
+    &--approve{
+        padding: 10px 35px;  
+    }
+}
+
+.modal-close-icon {
+    font-size: 40px;
+    line-height: 18px;
+    display: block;
+    width: 25px;
+    height: 25px;
+}
