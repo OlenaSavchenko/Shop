@@ -1,0 +1,33 @@
+.products-item__link {
+    text-decoration: none;
+    color: rgb(34, 28, 28);
+    &:hover{
+        color: rgb(34, 28, 28); 
+    }
+}
+
+.products-item__img-box {
+    margin-bottom: 30px;
+    padding-top: 40px;
+    height: 170px;
+}
+
+.products-item__img {
+display: block;
+margin: 0 auto;
+max-height: 140px;
+max-width: 100%;
+  }
+
+.products-item__tag{
+color: rgb(114, 112, 112);
+&--color{
+margin-bottom: 0;
+text-transform: capitalize;
+}
+}
+
+.products-item__btn {
+ position: absolute;
+ right: 15px;
+}
