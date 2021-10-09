@@ -11,16 +11,6 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     column-gap: 15px;
-    row-gap: 30px;
+    row-gap: 50px;
 }
 
-.products-item {
-position: relative;                  
-padding: 15px;
-box-shadow: -2px 1px 14px -4px rgba(34, 60, 80, 0.22);
-transition: all 0.3s linear;
-&:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-}
-}

@@ -1,10 +1,14 @@
-.products-item__link {
-    text-decoration: none;
-    color: rgb(34, 28, 28);
+.products-item {
+    position: relative;                  
+    padding: 15px;
+    box-shadow: -2px 1px 14px -4px rgba(34, 60, 80, 0.22);
+    transition: all 0.3s linear;
+    border-radius: 4px;
     &:hover{
-        color: rgb(34, 28, 28); 
+        cursor: pointer;
+        transform: scale(1.1);
     }
-}
+    }
 
 .products-item__img-box {
     margin-bottom: 30px;

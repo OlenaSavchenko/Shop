@@ -5,19 +5,18 @@ import './ProductList.scss'
 
 export default class ProductsList extends Component {
   render() {
-    const { products, onClick, onCheckBtnClick } = this.props
+    const { products, onClick, onCheckBtnClick, favouritesProducts } = this.props
     return (
       <>
         <h2 className="products-title">List of products</h2>
         <ul className="products-list">
-          {products.map(({ id, ...item }) => {
+          {products.map(item => {
             return (
-              <li key={id} className="products-item">
-                <ProductCard
+                <ProductCard key={item.id}
                   product={item}
-                  onClick={onClick}
-                  onCheckBtnClick={onCheckBtnClick} />
-              </li>
+                  onClick={onClick} 
+                  onCheckBtnClick={onCheckBtnClick} 
+                  favourites={favouritesProducts}/>
             )
           })}
         </ul>
@@ -26,15 +25,16 @@ export default class ProductsList extends Component {
   }
 }
 
+
 ProductsList.propTypes = {
-  products: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }).isRequired,
+  products: PropTypes.array.isRequired,
   onClick: PropTypes.func,
-  onCheckBtnClick: PropTypes.func
+  onCheckBtnClick: PropTypes.func,
+  favourites: PropTypes.array,
 }
 
 ProductsList.defaultProps = {
   onClick: () => { },
-  onCheckBtnClick: () => { }
+  onCheckBtnClick: () => { },
+  favourites:[]
 }

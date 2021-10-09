@@ -14,7 +14,8 @@ export default class Modal extends Component {
             {closeButton &&
               <Button
                 text={<span className="modal-close-icon">&times;</span >}
-                onClick={onClick} />
+                onClick={onClick} 
+                type="button"/>
             }
           </div>
           <div className="modal-body">{text}</div>
