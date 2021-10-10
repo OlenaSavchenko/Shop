@@ -12,7 +12,7 @@ export default class ProductCard extends Component {
     const { product, onClick } = this.props
     onClick(product.id)
   }
-
+  
   render() {
     const { name, item, color, price, url } = this.props.product;
     const { product, favourites } = this.props
@@ -66,7 +66,6 @@ export default class ProductCard extends Component {
     );
   }
 }
-
 
 ProductCard.propTypes = {
   product: PropTypes.shape({

@@ -50,7 +50,6 @@ class App extends Component {
 
   onCheckBtnClick = (id) => {
     const newFavouritesArr = [...this.state.favourites]
-    console.log("newFavouritesArr", newFavouritesArr);
     newFavouritesArr.includes(id)
       ? newFavouritesArr.splice(newFavouritesArr.indexOf(id), 1)
       : newFavouritesArr.push(id)
