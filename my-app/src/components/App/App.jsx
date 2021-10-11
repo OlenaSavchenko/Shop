@@ -53,7 +53,6 @@ class App extends Component {
     newFavouritesArr.includes(id)
       ? newFavouritesArr.splice(newFavouritesArr.indexOf(id), 1)
       : newFavouritesArr.push(id)
-
     this.setState({ favourites: newFavouritesArr })
     localStorage.setItem('favourites', JSON.stringify(newFavouritesArr))
   };
