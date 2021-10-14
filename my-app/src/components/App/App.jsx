@@ -1,101 +1,136 @@
-import React, { Component } from 'react';
+import { useState, useEffect } from 'react';
+import { getProducts } from '../../api/api';
+import Nav from '../Nav/Nav';
+import ProductsList from '../ProductsList/ProductList';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import Error from '../Error/Error';
-import ProductsList from '../ProductsList/ProductList';
-class App extends Component {
-  state = {
-    isModalOpen: false,
-    items: [],
-    error: null,
-    favourites: [],
-    selectedToCartItemId: null,
-    itemsIsInCart: [],
-  }
 
-  componentDidMount = async () => {
-    try {
-      const response = await fetch('/products.json')
-      const data = await response.json()
-      this.setState({ items: data })
-      this.setItemsInCart()
-      this.setFavouriteItems()
-    } catch (error) {
-      this.setState({ error })
-    }
-  }
+const App = () => {
+  const [isAddModalOpen, setAddModalOpen] = useState(false)
+  const [isRemoveModalOpen, setRemoveModalOpen] = useState(false)
+  const [products, setProducts] = useState([])
+  const [error, setError] = useState(null)
+  const [favourites, setFavourites] = useState([])
+  const [inCart, setInCart] = useState([])
+  const [inCartProductId, setInCartProductId] = useState(null)
+  const [outCartProductId, setOutCartProductId] = useState(null)
 
-  setItemsInCart = () => {
+  useEffect(() => {
+    getProducts()
+      .then(products => setProducts(products))
+      .catch(error => setError(error))
+  }, [])
+
+  useEffect(() => {
     if (localStorage.getItem('inCart')) {
-      const itemsIsInCartLS = JSON.parse(localStorage.getItem('inCart'))
-      this.setState({ itemsIsInCart: itemsIsInCartLS })
+      const inCartLS = JSON.parse(localStorage.getItem('inCart'))
+      setInCart(inCartLS)
     }
-  }
+  }, [])
 
-  setFavouriteItems = () => {
+  useEffect(() => {
     if (localStorage.getItem('favourites')) {
       const favouritesLS = JSON.parse(localStorage.getItem('favourites'))
-      this.setState({ favourites: favouritesLS })
+      setFavourites(favouritesLS)
     }
+  }, [])
+
+  const onAddToCartBtnClick = (id) => {
+    setInCartProductId(id)
+    setAddModalOpen(true)
   }
 
-  onOpenBtnClick = (id) => {
-    this.setState({ selectedToCartItemId: id })
-    this.setState({ isModalOpen: true })
+  const onDeleteFromCartBtnClick = (id) => {
+    setOutCartProductId(id)
+    setRemoveModalOpen(true)
   }
 
-  closeModal = () => {
-    this.setState({ isModalOpen: false })
+  const closeAddModal = () => {
+    setAddModalOpen(false)
   }
 
-  onCheckBtnClick = (id) => {
-    const newFavouritesArr = [...this.state.favourites]
-    newFavouritesArr.includes(id)
-      ? newFavouritesArr.splice(newFavouritesArr.indexOf(id), 1)
-      : newFavouritesArr.push(id)
-    this.setState({ favourites: newFavouritesArr })
-    localStorage.setItem('favourites', JSON.stringify(newFavouritesArr))
+  const closeRemoveModal = () => {
+    setRemoveModalOpen(false)
+  }
+
+  const onSelectBtnClick = (id) => {
+    const selectedProducts = [...favourites]
+    selectedProducts.includes(id)
+      ? selectedProducts.splice(selectedProducts.indexOf(id), 1)
+      : selectedProducts.push(id)
+    setFavourites(selectedProducts)
+    localStorage.setItem('favourites', JSON.stringify(selectedProducts))
   };
 
-  onCartBtnClick = () => {
-    const newItemsInCartArr = [...this.state.itemsIsInCart]
-    const { selectedToCartItemId } = this.state
-    newItemsInCartArr.push(selectedToCartItemId)
-    const uniqueCartItems = [...new Set(newItemsInCartArr)];
-    this.setState({ itemsIsInCart: uniqueCartItems })
+  const onApproveAddBtnClick = () => {
+    const productsInCart = [...inCart]
+    productsInCart.push(inCartProductId)
+    const uniqueCartItems = [...new Set(productsInCart)];
+    setInCart(uniqueCartItems)
     localStorage.setItem('inCart', JSON.stringify(uniqueCartItems))
-    this.closeModal()
+    closeAddModal()
   }
 
-  render() {
-    const { isModalOpen, items, error, favourites } = this.state
-    return (
-      <>
-        {error
-          ? <Error />
-          : <ProductsList products={items}
-           favouritesProducts ={favourites}
-            onClick={this.onOpenBtnClick}
-            onCheckBtnClick={this.onCheckBtnClick} />
-        }
-        {isModalOpen && <Modal
-          className="save-modal"
-          header="Do you want to add the product to cart?"
-          text="This product will be saved in your cart"
-          closeButton={true}
-          actions={
-            <Button
-              text="Ok"
-              backgroundColor="#4CAF50"
-              onClick={this.onCartBtnClick}
-              type="button"
-            />
-          }
-          onClick={this.closeModal} />
-        }
-      </>
-    );
+  const onApproveDeleteBtnClick = () => {
+    const filtredProducts = inCart.filter(id => id !== outCartProductId)
+    setInCart(filtredProducts)
+    localStorage.setItem('inCart', JSON.stringify(filtredProducts))
+    closeRemoveModal()
   }
+  return (
+    <>
+      <Nav />
+      {error
+        ? <Error />
+        : <ProductsList products={products}
+          favourites={favourites}
+          inCart={inCart}
+          onAddBtnClick={onAddToCartBtnClick}
+          onDeleteBtnClick={onDeleteFromCartBtnClick}
+          onSelectBtnClick={onSelectBtnClick} />
+      }
+      {isAddModalOpen && <Modal
+        className="save-modal"
+        header="Do you want to add the product to cart?"
+        text="This product will be saved in your cart"
+        closeButton={true}
+        actions={
+          <Button
+            text="Ok"
+            backgroundColor="#4CAF50"
+            onClick={onApproveAddBtnClick}
+            type="button"
+          />
+        }
+        onClick={closeAddModal} />
+      }
+      {isRemoveModalOpen && <Modal
+        className="delete-modal"
+        header="Do you want to delete this product from cart?"
+        text="This product will be deleted from your cart"
+        closeButton={true}
+        actions={
+          <>
+            <Button
+              type="button"
+              text="Ok"
+              backgroundColor="#b93b3b"
+              className="delete-modal__btn delete-modal__btn--approve"
+              onClick={onApproveDeleteBtnClick} />
+            <Button
+              type="button"
+              text="Cancel"
+              backgroundColor="#b93b3b"
+              onClick={closeRemoveModal}
+              className="delete-modal__btn" />
+          </>
+        }
+        onClick={closeRemoveModal}
+      />
+      }
+    </>
+  );
 }
 
 export default App;

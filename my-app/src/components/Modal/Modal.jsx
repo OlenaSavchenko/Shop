@@ -1,33 +1,30 @@
-import React, { Component } from 'react'
 import Button from '../Button/Button'
 import PropTypes from 'prop-types';
 import './Modal.scss'
 
-export default class Modal extends Component {
-  render() {
-    const { header, text, closeButton, actions, className, onClick } = this.props
-    return (<>
-      <div className={`modal-box ${className}`}>
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{header}</h5>
-            {closeButton &&
-              <Button
-                text={<span className="modal-close-icon">&times;</span >}
-                onClick={onClick} 
-                type="button"/>
-            }
-          </div>
-          <div className="modal-body">{text}</div>
-          <div className="modal-footer">
-            {actions}
-          </div>
+const Modal = (props) => {
+  const { header, text, closeButton, actions, className, onClick } = props
+  return (<>
+    <div className={`modal-box ${className}`}>
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title">{header}</h5>
+          {closeButton &&
+            <Button
+              text={<span className="modal-close-icon">&times;</span >}
+              onClick={onClick}
+              type="button" />
+          }
+        </div>
+        <div className="modal-body">{text}</div>
+        <div className="modal-footer">
+          {actions}
         </div>
       </div>
-      <div className="modal-backdrop" onClick={onClick}></div>
-    </>
-    )
-  }
+    </div>
+    <div className="modal-backdrop" onClick={onClick}></div>
+  </>
+  )
 }
 
 Modal.propTypes = {
@@ -45,3 +42,5 @@ Modal.defaultProps = {
   actions: null,
   className: ""
 }
+
+export default Modal

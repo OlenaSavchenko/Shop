@@ -1,0 +1,23 @@
+.nav-list{
+margin: 20px;
+list-style: none;
+display: flex;
+justify-content: center;
+background-color: rgb(238, 243, 238);
+box-shadow: 3px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.nav-item { 
+    &:not(:last-child){
+        margin-right: 20px;
+    }
+}
+
+.nav-link{
+  text-decoration: none;
+  color: gray;
+  font-size: 30px;
+ &:hover{
+ color: green;
+    }
+}

@@ -1,28 +1,26 @@
-import React, { Component } from 'react'
 import ProductCard from '../ProductCard/ProductCard';
 import PropTypes from 'prop-types';
 import './ProductList.scss'
 
-export default class ProductsList extends Component {
-  render() {
-    const { products, onClick, onCheckBtnClick, favouritesProducts } = this.props
-    return (
-      <>
-        <h2 className="products-title">List of products</h2>
-        <ul className="products-list">
-          {products.map(item => {
-            return (
-                <ProductCard key={item.id}
-                  product={item}
-                  onClick={onClick} 
-                  onCheckBtnClick={onCheckBtnClick} 
-                  favourites={favouritesProducts}/>
-            )
-          })}
-        </ul>
-      </>
-    )
-  }
+const ProductsList = (props) => {
+  const { products, onAddBtnClick, onSelectBtnClick, onDeleteBtnClick, favourites, inCart } = props
+  return (
+      <ul className="products-list">
+        {products.map(item => {
+          return (
+            <ProductCard key={item.id}
+              product={item}
+              onAddBtnClick={onAddBtnClick}
+              onSelectBtnClick={onSelectBtnClick}
+              favourites={favourites}
+              inCart = {inCart}
+              onDeleteBtnClick={onDeleteBtnClick}
+            />
+          )
+        })}
+      </ul>
+
+  )
 }
 
 
@@ -36,5 +34,7 @@ ProductsList.propTypes = {
 ProductsList.defaultProps = {
   onClick: () => { },
   onCheckBtnClick: () => { },
-  favourites:[]
+  favourites: []
 }
+
+export default ProductsList

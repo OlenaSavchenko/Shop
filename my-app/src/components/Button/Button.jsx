@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import "./Button.scss"
 
-export default class Button extends Component {
-    render() {
-        const { backgroundColor, text, className, onClick, type } = this.props
-        return (<button
-            type={type}
-            onClick={onClick}
-            style={{ backgroundColor: backgroundColor, color: "white" }}
-            className={`btn ${className}`}>{text}
-        </button >)
-    }
+const Button = (props) => {
+    const { backgroundColor, text, className, onClick, type } = props
+    return (<button
+        type={type}
+        onClick={onClick}
+        style={{ backgroundColor: backgroundColor, color: "white" }}
+        className={`btn ${className}`}>{text}
+    </button >)
 }
 
 Button.propTypes = {
@@ -29,3 +26,5 @@ Button.defaultProps = {
     onClick: () => { }
 
 }
+
+export default Button
