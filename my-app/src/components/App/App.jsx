@@ -93,22 +93,16 @@ const App = () => {
         <Route exact path="/home">
           {error
             ? <Error />
-            : <ProductsList products={products}
-              favourites={favourites}
-              inCart={inCart}
-              onAddBtnClick={onAddToCartBtnClick}
-              onSelectBtnClick={onSelectBtnClick} />
+            : <ProductsList
+              products={products} favourites={favourites}
+              onAddBtnClick={onAddToCartBtnClick} onSelectBtnClick={onSelectBtnClick} />
           }
           {isAddModalOpen && <Modal
-            className="save-modal"
-            header="Do you want to add the product to cart?"
-            closeButton={true}
-            actions={
+            className="save-modal" header="Do you want to add the product to cart?"
+            closeButton={true} actions={
               <Button
-                text="Ok"
-                backgroundColor="#4CAF50"
+                type="button" text="Ok" backgroundColor="#4CAF50"
                 onClick={onApproveAddBtnClick}
-                type="button"
               />
             }
             onClick={closeAddModal} />
@@ -116,29 +110,22 @@ const App = () => {
         </Route>
         <Route exact path="/cart">
           <Cart
-            products={products}
-            inCart={inCart}
-            favourites={favourites}
+            products={products} inCart={inCart} favourites={favourites}
             onDeleteBtnClick={onDeleteFromCartBtnClick}
-            onSelectBtnClick={onSelectBtnClick}/>
+            onSelectBtnClick={onSelectBtnClick} />
+
           {isRemoveModalOpen && <Modal
-            className="delete-modal"
-            header="Do you want to delete this product from cart?"
-            closeButton={true}
-            actions={
+            className="delete-modal" header="Do you want to delete this product from cart?"
+            closeButton={true} actions={
               <>
                 <Button
-                  type="button"
-                  text="Ok"
-                  backgroundColor="#b93b3b"
+                  type="button" text="Ok" backgroundColor="#b93b3b"
                   className="delete-modal__btn delete-modal__btn--approve"
                   onClick={onApproveDeleteBtnClick} />
                 <Button
-                  type="button"
-                  text="Cancel"
-                  backgroundColor="#b93b3b"
-                  onClick={closeRemoveModal}
-                  className="delete-modal__btn" />
+                  type="button" text="Cancel" backgroundColor="#b93b3b"
+                  className="delete-modal__btn" onClick={closeRemoveModal}
+                />
               </>
             }
             onClick={closeRemoveModal}
@@ -146,21 +133,16 @@ const App = () => {
           }
         </Route>
         <Route exact path="/favourites">
-          <Favourites products={products}
-            favourites={favourites}
-            inCart={inCart}
-            onAddBtnClick={onAddToCartBtnClick}
-            onSelectBtnClick={onSelectBtnClick}  />
+          <Favourites
+            products={products} favourites={favourites}
+            onAddBtnClick={onAddToCartBtnClick} onSelectBtnClick={onSelectBtnClick} />
+
           {isAddModalOpen && <Modal
-            className="save-modal"
-            header="Do you want to add the product to cart?"
-            closeButton={true}
-            actions={
+            className="save-modal" header="Do you want to add the product to cart?"
+            closeButton={true} actions={
               <Button
-                text="Ok"
-                backgroundColor="#4CAF50"
+                type="button" text="Ok" backgroundColor="#4CAF50"
                 onClick={onApproveAddBtnClick}
-                type="button"
               />
             }
             onClick={closeAddModal} />
