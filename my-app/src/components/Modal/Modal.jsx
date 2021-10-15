@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Modal.scss'
 
 const Modal = (props) => {
-  const { header, text, closeButton, actions, className, onClick } = props
+  const { header, closeButton, actions, className, onClick } = props
   return (<>
     <div className={`modal-box ${className}`}>
       <div className="modal-content">
@@ -16,7 +16,6 @@ const Modal = (props) => {
               type="button" />
           }
         </div>
-        <div className="modal-body">{text}</div>
         <div className="modal-footer">
           {actions}
         </div>
@@ -29,18 +28,18 @@ const Modal = (props) => {
 
 Modal.propTypes = {
   header: PropTypes.string,
-  text: PropTypes.string,
   closeButton: PropTypes.bool,
   actions: PropTypes.node,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onClick: PropTypes.func
 }
 
 Modal.defaultProps = {
   header: "",
-  text: "",
   closeButton: false,
   actions: null,
-  className: ""
+  className: "",
+  onClick: () => { }
 }
 
 export default Modal

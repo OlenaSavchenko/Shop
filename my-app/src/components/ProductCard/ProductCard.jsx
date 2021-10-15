@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import "./ProductCard.scss";
 
 const ProductCard = (props) => {
-  const { product, favourites, inCart, onAddBtnClick, onSelectBtnClick, onDeleteBtnClick } = props
+  const { product, favourites, onAddBtnClick, onSelectBtnClick, onDeleteBtnClick, status } = props
   const { name, item, color, price, url, id } = product;
   const selected = favourites.some(item => item === id)
-  const addedInCart = inCart.some(item => item === id)
+  
   return (
     <li className="products-item">
-      {addedInCart
+      {status === "inCart"
         ? <Button
           className="products-item__btn"
           text={
@@ -61,7 +61,7 @@ const ProductCard = (props) => {
         height="16"
         viewBox="0 0 16 16"
         onClick={() => onSelectBtnClick(id)}
-        fill={selected ? "red" : "currentColor"}
+        fill={selected || status === 'favourite' ? "red" : "currentColor"}
       >
         <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
       </svg>
@@ -78,16 +78,23 @@ ProductCard.propTypes = {
     price: PropTypes.string.isRequired,
     url: PropTypes.string,
   }).isRequired,
-  onClick: PropTypes.func,
-  onSelectBtnClick: PropTypes.func
+  onAddBtnClick: PropTypes.func,
+  onSelectBtnClick: PropTypes.func,
+  onDeleteBtnClick: PropTypes.func,
+  status: PropTypes.string,
+  favourites: PropTypes.array
 }
 
 ProductCard.defaultProps = {
   item: "ask information in the shop",
   color: "ask information in the shop",
   url: "https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png",
+  status: null,
+  favourites: [],
   onClick: () => { },
-  onSelectBtnClick: () => { }
+  onAddBtnClick: () => { },
+  onDeleteBtnClick: () => { }
+
 }
 
 export default ProductCard
