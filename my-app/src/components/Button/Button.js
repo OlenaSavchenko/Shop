@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import "./Button.scss"
 
-const Button = (props) => {
-    const { backgroundColor, text, className, onClick, type } = props
+const Button = ({ backgroundColor, text, className, onClick, type }) => {
     return (<button
         type={type}
         onClick={onClick}
@@ -24,7 +23,6 @@ Button.defaultProps = {
     text: null,
     className: "",
     onClick: () => { }
-
 }
 
 export default Button
