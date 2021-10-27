@@ -1,4 +1,4 @@
-import { SET_PRODUCTS, SET_ERROR, SET_FAVOURITES, SET_IN_CART, SET_MODAL_OPEN } from './types'
+import { SET_PRODUCTS, SET_ERROR, SET_FAVOURITES, SET_IN_CART, SET_MODAL_OPEN, CLEAR_CART } from './types'
 
 const initialState = {
     goods: [],
@@ -19,6 +19,8 @@ export const productsReducer = (state = initialState, action) => {
             return ({ ...state, inCart: action.payload })
         case SET_MODAL_OPEN:
             return ({ ...state, isModalActive: action.payload })
+        case CLEAR_CART:
+            return ({ ...state, inCart: action.payload })
         default:
             return state;
     }

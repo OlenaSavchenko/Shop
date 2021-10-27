@@ -18,7 +18,7 @@ const Cart = ({ onRemoveClick, onConfirmRemoveClick }) => {
         <>
             {itemsInCart.length
                 ? <div className="cart-wrapper">
-                    <OrderForm />
+                    <OrderForm itemsInCart={itemsInCart} />
                     <div>
                         <p style={{ marginLeft: "30px" }}>{`${itemsInCart.length} product(s) in cart`}</p>
                         <ul className="products-list cart-list">

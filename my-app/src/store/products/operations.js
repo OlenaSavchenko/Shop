@@ -1,5 +1,5 @@
 import { getProducts } from "../../api/products";
-import { setProducts, setError, setFavourites, setInCart, setModalOpen } from "./actions";
+import { setProducts, setError, setFavourites, setInCart, setModalOpen, clearCart } from "./actions";
 
 
 export const getProdutsThunk = () => dispatch => {
@@ -42,4 +42,9 @@ export const removeFromCart = (products) => dispatch => {
     dispatch(setInCart(products))
     dispatch(setModalOpen(false))
     localStorage.setItem('inCart', JSON.stringify(products))
+}
+
+export const clearCartThunk = () => dispatch => {
+    localStorage.removeItem('inCart')
+    dispatch(clearCart())
 }

@@ -1,11 +1,15 @@
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
 import { TextField, Typography, Button } from '@mui/material';
 import NumberFormat from 'react-number-format';
 import { formValues } from './OrderFormData';
-import { orderFormSchema } from "./OrderFormSchema"
+import { orderFormSchema } from "./OrderFormSchema";
+import { clearCartThunk as clearCart } from "../../store/products/operations"
 import "./OrderForm.scss"
 
-const OrderForm = () => {
+const OrderForm = ({ itemsInCart }) => {
+    const dispatch = useDispatch()
     const OrderPhoneInput = ({ name, label }) => {
         const [field] = useField(name)
         return <NumberFormat {...field}
@@ -15,9 +19,17 @@ const OrderForm = () => {
             label={label} variant="standard" />
     }
 
-    const handleFormSubmit = (values) => {
-        const { firstName, lastName, age, address, tel } = values
-        console.log(firstName, lastName, age, address, tel);
+    const handleFormSubmit = (values, { setSubmitting }) => {
+        //console data
+        console.group("This is info from order form");
+        console.table(values);
+        console.groupEnd();
+        console.group("This is product(s) from cart");
+        console.table(itemsInCart);
+        console.groupEnd();
+        //--------------
+        dispatch(clearCart())
+        setSubmitting(false)
     }
 
     return (
@@ -50,4 +62,12 @@ const OrderForm = () => {
 
 }
 
+
+OrderForm.propTypes = {
+    product: PropTypes.array
+}
+
+OrderForm.defaultProps = {
+    itemsInCart: [],
+}
 export default OrderForm

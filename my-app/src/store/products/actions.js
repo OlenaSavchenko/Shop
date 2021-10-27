@@ -1,4 +1,4 @@
-import { SET_PRODUCTS, SET_ERROR, SET_FAVOURITES, SET_IN_CART, SET_MODAL_OPEN } from './types'
+import { SET_PRODUCTS, SET_ERROR, SET_FAVOURITES, SET_IN_CART, SET_MODAL_OPEN, CLEAR_CART } from './types'
 
 export const setProducts = data => {
     return { type: SET_PRODUCTS, payload: data }
@@ -18,4 +18,8 @@ export const setInCart = data => {
 
 export const setModalOpen = boolean => {
     return { type: SET_MODAL_OPEN, payload: boolean }
+}
+
+export const clearCart = () => {
+    return { type: CLEAR_CART, payload: [] }
 }
