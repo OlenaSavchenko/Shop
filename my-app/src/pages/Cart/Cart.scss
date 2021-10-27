@@ -1,0 +1,12 @@
+.cart-wrapper {
+    display: grid;
+    // grid-template-columns: auto 300px;
+    //    grid-template-rows: auto auto;
+    grid-template-areas: "products cartForm"
+                          "products products";
+ 
+}
+
+.cart-list {
+    grid-area: products;
+}

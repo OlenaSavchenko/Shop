@@ -6,7 +6,7 @@ import { getProdutsThunk as getProducts, getFavourites, getInCart, removeFromCar
 import { setModalOpen } from "../../store/products/actions"
 import Nav from '../Nav/Nav';
 import ProductsList from '../../pages/ProductsList/ProductList';
-import Cart from '../../pages/Cart';
+import Cart from '../../pages/Cart/Cart';
 import Favourites from '../../pages/Favourite';
 import NotFound from "../../pages/NotFound/NotFound";
 
