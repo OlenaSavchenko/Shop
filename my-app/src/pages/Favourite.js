@@ -13,7 +13,7 @@ const Favourites = ({ onAddClick, onConfirmAddClick }) => {
 
     return (
         <>
-            {(favouritesItems.length > 0)
+            {favouritesItems.length
                 ? <>
                     <p style={{ marginLeft: "30px" }}>{`${favouritesItems.length} favourite product(s)`}</p>
                     <ul className="products-list">

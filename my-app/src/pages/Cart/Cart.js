@@ -4,7 +4,7 @@ import { getGoods, isInCart, isModalOpen } from "../../store/products/selectors"
 import ProductCard from '../../components/ProductCard/ProductCard.js';
 import Modal from '../../components/Modal/Modal.js';
 import Button from '../../components/Button/Button.js';
-import CartForm from "../../components/CartForm/CartForm";
+import OrderForm from "../../components/OrderForm/OrderForm";
 import "./Cart.scss"
 
 const Cart = ({ onRemoveClick, onConfirmRemoveClick }) => {
@@ -16,9 +16,10 @@ const Cart = ({ onRemoveClick, onConfirmRemoveClick }) => {
 
     return (
         <>
-            <div className="cart-wrapper">
-                {(itemsInCart.length > 0)
-                    ? <div>
+            {itemsInCart.length
+                ? <div className="cart-wrapper">
+                    <OrderForm />
+                    <div>
                         <p style={{ marginLeft: "30px" }}>{`${itemsInCart.length} product(s) in cart`}</p>
                         <ul className="products-list cart-list">
                             {itemsInCart.map(item => {
@@ -32,9 +33,8 @@ const Cart = ({ onRemoveClick, onConfirmRemoveClick }) => {
                             })}
                         </ul>
                     </div>
-                    : <p style={{ marginLeft: "30px" }}>Your cart is empty</p>}
-                <CartForm />
-            </div>
+                </div>
+                : <p style={{ marginLeft: "30px" }}>Your cart is empty</p>}
             {modalOpen && <Modal
                 className="delete-modal"
                 header="Do you want to delete this product from cart?"

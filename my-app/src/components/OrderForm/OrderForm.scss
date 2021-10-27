@@ -5,8 +5,11 @@
 .cart-form{
     grid-area: cartForm;
     display: grid;
-    padding-right: 20px;
-    column-gap: 15px;
+    margin: 20px 40px 0 0;
+    padding: 15px;
     row-gap: 15px;
-    width: 300px;
+}
+
+.cart-error-msg {
+  color: red;
 }
