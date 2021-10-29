@@ -11,7 +11,7 @@ const Modal = ({ header, actions, className }) => {
     dispatch(setModalOpen(false))
   }
   return (<>
-    <div className={`modal-box ${className}`}>
+    <div className={`modal-box ${className}`} data-testid="modal-backdrop">
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title">{header}</h5>
